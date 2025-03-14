@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -7,68 +8,89 @@ export class Drug {
 }
 
 export class Pharmacy {
+  static MINIMUM_BENEFIT = 0;
+  static MAXIMUM_BENEFIT = 50;
+
   constructor(drugs = []) {
     this.drugs = drugs;
   }
+
   updateBenefitValue() {
-    for (var i = 0; i < this.drugs.length; i++) {
-      if (
-        this.drugs[i].name != "Herbal Tea" &&
-        this.drugs[i].name != "Fervex"
-      ) {
-        if (this.drugs[i].benefit > 0) {
-          if (this.drugs[i].name != "Magic Pill") {
-            if (this.drugs[i].name === "Dafalgan") {
-              this.drugs[i].benefit = Math.max(0, this.drugs[i].benefit - 2);
-            } else {
-              this.drugs[i].benefit = this.drugs[i].benefit - 1;
-            }
-          }
-        }
-      } else {
-        if (this.drugs[i].benefit < 50) {
-          this.drugs[i].benefit = this.drugs[i].benefit + 1;
-          if (this.drugs[i].name == "Fervex") {
-            if (this.drugs[i].expiresIn < 11) {
-              if (this.drugs[i].benefit < 50) {
-                this.drugs[i].benefit = this.drugs[i].benefit + 1;
-              }
-            }
-            if (this.drugs[i].expiresIn < 6) {
-              if (this.drugs[i].benefit < 50) {
-                this.drugs[i].benefit = this.drugs[i].benefit + 1;
-              }
-            }
-          }
-        }
+    this.drugs.forEach((drug) => {
+      if (drug.name === "Magic Pill") {
+        return; // Magic Pill never changes
       }
-      if (this.drugs[i].name != "Magic Pill") {
-        this.drugs[i].expiresIn = this.drugs[i].expiresIn - 1;
-      }
-      if (this.drugs[i].expiresIn < 0) {
-        if (this.drugs[i].name != "Herbal Tea") {
-          if (this.drugs[i].name != "Fervex") {
-            if (this.drugs[i].benefit > 0) {
-              if (this.drugs[i].name != "Magic Pill") {
-                if (this.drugs[i].name === "Dafalgan") {
-                  this.drugs[i].benefit = Math.max(0, this.drugs[i].benefit - 2);
-                } else {
-                  this.drugs[i].benefit = this.drugs[i].benefit - 1;
-                }
-              }
-            }
-          } else {
-            this.drugs[i].benefit =
-              this.drugs[i].benefit - this.drugs[i].benefit;
-          }
-        } else {
-          if (this.drugs[i].benefit < 50) {
-            this.drugs[i].benefit = this.drugs[i].benefit + 1;
-          }
-        }
-      }
-    }
+
+      this._updateExpiresIn(drug);
+      this._updateBenefit(drug);
+    });
 
     return this.drugs;
+  }
+
+  _updateExpiresIn(drug) {
+    drug.expiresIn--;
+  }
+
+  _updateBenefit(drug) {
+    switch (drug.name) {
+      case "Herbal Tea":
+        this._updateHerbalTeaBenefit(drug);
+        break;
+      case "Fervex":
+        this._updateFervexBenefit(drug);
+        break;
+      case "Dafalgan":
+        this._updateDafalganBenefit(drug);
+        break;
+      default:
+        this._updateNormalDrugBenefit(drug);
+    }
+  }
+
+  _updateHerbalTeaBenefit(drug) {
+    if (drug.benefit < Pharmacy.MAXIMUM_BENEFIT) {
+      drug.benefit++;
+      if (drug.expiresIn < 0 && drug.benefit < Pharmacy.MAXIMUM_BENEFIT) {
+        drug.benefit++;
+      }
+    }
+  }
+
+  _updateFervexBenefit(drug) {
+    if (drug.expiresIn < 0) {
+      drug.benefit = 0;
+      return;
+    }
+
+    if (drug.benefit < Pharmacy.MAXIMUM_BENEFIT) {
+      drug.benefit++;
+
+      if (drug.expiresIn < 10 && drug.benefit < Pharmacy.MAXIMUM_BENEFIT) {
+        drug.benefit++;
+      }
+
+      if (drug.expiresIn < 5 && drug.benefit < Pharmacy.MAXIMUM_BENEFIT) {
+        drug.benefit++;
+      }
+    }
+  }
+
+  _updateDafalganBenefit(drug) {
+    if (drug.benefit > 0) {
+      drug.benefit = Math.max(
+        Pharmacy.MINIMUM_BENEFIT,
+        drug.benefit - (drug.expiresIn < 0 ? 4 : 2)
+      );
+    }
+  }
+
+  _updateNormalDrugBenefit(drug) {
+    if (drug.benefit > 0) {
+      drug.benefit = Math.max(
+        Pharmacy.MINIMUM_BENEFIT,
+        drug.benefit - (drug.expiresIn < 0 ? 2 : 1)
+      );
+    }
   }
 }
