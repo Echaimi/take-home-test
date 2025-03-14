@@ -283,13 +283,13 @@
     js-tokens "^4.0.0"
     picocolors "^1.0.0"
 
-"@babel/node@^7.23.9":
-  version "7.23.9"
-  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.23.9.tgz#fc40dc371439f1a45535ebf515232f4f046ef7a9"
-  integrity sha512-/d4ju/POwlGIJlZ+NqWH1qu61wt6ZlTZZZutrK2MOSdaH1JCh726nLw/GSvAjG+LTY6CO9SsB8uWcttnFKm6yg==
+"@babel/node@^7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.26.0.tgz#4b126f4eb56a05a97990a650fae0a24ad9b0c583"
+  integrity sha512-5ASMjh42hbnqyCOK68Q5chh1jKAqn91IswFTN+niwt4FLABhEWCT1tEuuo6mlNQ4WG/oFQLvJ71PaHAKtWtJyA==
   dependencies:
-    "@babel/register" "^7.23.7"
-    commander "^4.0.1"
+    "@babel/register" "^7.25.9"
+    commander "^6.2.0"
     core-js "^3.30.2"
     node-environment-flags "^1.0.5"
     regenerator-runtime "^0.14.0"
@@ -968,10 +968,10 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/register@^7.23.7":
-  version "7.23.7"
-  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.23.7.tgz#485a5e7951939d21304cae4af1719fdb887bc038"
-  integrity sha512-EjJeB6+kvpk+Y5DAkEAmbOBEFkh9OASx0huoEkqYTFxAZHzOAX2Oh5uwAUuL2rUddqfM0SA+KPXV2TbzoZ2kvQ==
+"@babel/register@^7.25.9":
+  version "7.25.9"
+  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.25.9.tgz#1c465acf7dc983d70ccc318eb5b887ecb04f021b"
+  integrity sha512-8D43jXtGsYmEeDvm4MWHYUpWf8iiXgWYx3fW7E7Wb7Oe6FWqJPl5K6TuFW0dOwNZzEE5rjlaSJYH9JjrUKJszA==
   dependencies:
     clone-deep "^4.0.1"
     find-cache-dir "^2.0.0"
@@ -1844,6 +1844,11 @@ commander@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+
+commander@^6.2.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
+  integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
 
 commondir@^1.0.1:
   version "1.0.1"
